@@ -20,20 +20,14 @@ save_and_format_agent = LlmAgent(
     model=MODEL,
     description="Saves campaign in DB and returns final structured response.",
     tools=[save_campaign],
-    instruction=(
+   instruction=(
     "You are the final step in a campaign pipeline.\n\n"
     "You will receive outputs from previous agents:\n"
     "- idea_result\n"
     "- copy_result\n"
     "- planner_result\n\n"
-    "Even if formatting is not perfect, extract the key information.\n\n"
-    "Call the save_campaign tool with:\n"
-    "{"
-    '"product": idea_result["product"], '
-    '"idea": idea_result, '
-    '"copy": copy_result, '
-    '"plan": planner_result'
-    "}\n\n"
+    "Extract the key information and call the save_campaign tool.\n\n"
+    "Pass data with keys: product, idea, copy, plan\n\n"
     "Then return output in this format:\n\n"
     "Campaign Idea:\n"
     "...\n\n"
