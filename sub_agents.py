@@ -36,14 +36,11 @@ planner_agent = LlmAgent(
     model=MODEL,
     description="Builds posting platform + schedule and final structured output.",
     instruction=(
-        "You are the Planner Agent. Use idea and copy to create a simple posting plan.\n"
-        "Idea JSON:\n{idea_result}\n"
-        "Copy JSON:\n{copy_result}\n"
-        "Return ONLY valid JSON with this schema:\n"
-        "{"
-        '"plan":{"platform":"...","schedule":"..."},'
-        '"final_output":"Campaign Idea:\n...\n\nAd Copy:\n* Headline: ...\n* Description: ...\n* CTA: ...\n\nPosting Plan:\n* Platform: ...\n* Schedule: ..."'
-        "}"
-    ),
+    "You are the Planner Agent. Use idea and copy to create a simple posting plan.\n"
+    "Idea JSON:\n{idea_result}\n"
+    "Copy JSON:\n{copy_result}\n"
+    "Return ONLY valid JSON like this:\n"
+    '{"platform":"Instagram","schedule":"Post at 7 PM for 3 days"}'
+),
     output_key="planner_result",
 )
