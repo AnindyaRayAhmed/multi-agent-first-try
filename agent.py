@@ -27,7 +27,14 @@ save_and_format_agent = LlmAgent(
     "- copy_result\n"
     "- planner_result\n\n"
     "Extract the key information and call the save_campaign tool.\n\n"
-    "Pass data with keys: product, idea, copy, plan\n\n"
+    "If any field is missing, infer reasonable values instead of failing.\n\n"
+    "Call save_campaign tool EXACTLY like this:\n"
+    "{\n"
+    '  "product": idea_result["product"],\n'
+    '  "idea": idea_result,\n'
+    '  "copy": copy_result,\n'
+    '  "plan": planner_result["plan"]\n'
+    "}\n\n"
     "Then return output in this format:\n\n"
     "Campaign Idea:\n"
     "...\n\n"
