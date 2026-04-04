@@ -40,7 +40,7 @@ planner_agent = LlmAgent(
     "Idea JSON:\n{idea_result}\n"
     "Copy JSON:\n{copy_result}\n"
     "Return ONLY valid JSON like this:\n"
-    '{"platform":"Instagram","schedule":"Post at 7 PM for 3 days"}'
+    '{"plan":{"platform":"Instagram","schedule":"Post at 7 PM for 3 days"}}'
 ),
     output_key="planner_result",
 )
