@@ -9,12 +9,12 @@ import sqlite3
 from datetime import datetime
 from typing import Any, Dict, List
 
-DEFAULT_DB_PATH = os.getenv("CAMPAIGN_DB_PATH", "campaigns.db")
+DEFAULT_DB_PATH = os.getenv("CAMPAIGN_DB_PATH", "/tmp/campaigns.db")
 
 
 def _get_connection(db_path: str = DEFAULT_DB_PATH) -> sqlite3.Connection:
     """Create a SQLite connection."""
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -91,7 +91,7 @@ def fetch_campaigns(db_path: str = DEFAULT_DB_PATH) -> List[Dict[str, Any]]:
     return campaigns
 
 def init_brand_table():
-    conn = sqlite3.connect("campaigns.db")
+    conn = sqlite3.connect(DEFAULT_DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -107,7 +107,7 @@ def init_brand_table():
 
 
 def save_brand(brand, tone, colors):
-    conn = sqlite3.connect("campaigns.db")
+    conn = sqlite3.connect(DEFAULT_DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -122,7 +122,7 @@ def save_brand(brand, tone, colors):
 
 
 def get_brand(brand):
-    conn = sqlite3.connect("campaigns.db")
+    conn = sqlite3.connect(DEFAULT_DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM brand WHERE brand=?", (brand,))
